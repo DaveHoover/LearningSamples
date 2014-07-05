@@ -1,0 +1,671 @@
+
+-- ALTER TABLE Orders ADD CONSTRAINT FK_Customer_Order FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId) 
+
+Insert Into BuildXml Values ( 1 , 'F:\wm.pbxml');
+
+-- For now, anthing 10 or above will be Apollo
+Insert Into BuildXml Values ( 10 , '');
+
+
+Insert Into BuildType Values ( 0 , 'None');
+Insert Into BuildType Values ( 1 , 'Daily');
+Insert Into BuildType Values ( 2 , 'Weekly');
+
+Insert Into Users Values ( 1 , 'Dave' , 'Hoover' );
+
+Insert Into Email Values ( 1 , 'dahoover@microsoft.com' , 1 , 1 );
+
+Insert Into PhoneSKU Values ( 1 , 'E600 ARMV7 Release');
+Insert Into PhoneSKU Values ( 2 , 'Windows Phone Emulator x86 Release');
+Insert Into PhoneSKU Values ( 3 , 'Windows Phone Emulator x86 Checked');
+Insert Into PhoneSKU Values ( 4 , 'CEPC x86 Release');
+Insert Into PhoneSKU Values ( 5 , 'HTC SparkW ARMV7 Release');
+Insert Into PhoneSKU Values ( 6 , 'HTC Mazaa ARMV7 Release');
+-- Temporary will be that anything greater or = 10 will be an Apollo SKU
+
+Insert Into PhoneSKU Values ( 10 , 'device x86fre');
+Insert Into PhoneSKU Values ( 11 , 'device x86chk');
+Insert Into PhoneSKU Values ( 12 , 'device armfre');
+Insert Into PhoneSKU Values ( 13 , 'device armchk');
+
+Insert Into PhoneSKU Values ( 14 , 'desktop x86chk');
+Insert Into PhoneSKU Values ( 15 , 'desktop x86fre');
+
+
+--update PhoneSKU set Name = 'HTC SparkW ARMV7 Release' where ID = 5
+--Go
+--update PhoneSKU set Name = 'HTC Mazaa ARMV7 Release' where ID = 6
+
+
+Insert Into Commands Values ( 1 , 'Sync' ,'Wm Sync');
+Insert Into Commands Values ( 2 , 'RebuildNoTest' ,'Wm Rebuild /e:test');
+Insert Into Commands Values ( 3 , 'RebuildAll' ,'SET BUILDREL_TESTREL=1&&Wm Rebuild');
+Insert Into Commands Values ( 4 , 'Clean' ,'ceclean.bat');
+Insert Into Commands Values ( 5 , 'Clean_Sync_Rebuild' ,'');
+Insert Into Commands Values ( 6 , 'Clean_Sync_RebuildNoTest'   ,'');
+Insert Into Commands Values ( 7 , 'WpSync' ,'Wp Sync');
+Insert Into Commands Values ( 8 , 'WpRebuildNoTest' ,'Wp Rebuild /e:test');
+Insert Into Commands Values ( 9 , 'WpRebuildAll' ,'Wp Rebuild');
+Insert Into Commands Values ( 10 , 'WpClean_Sync_Rebuild' ,'');
+Insert Into Commands Values ( 11 , 'WpClean_Sync_RebuildNoTest'   ,'');
+
+
+--Update Commands 
+--       Set Command = 'Clean_Sync_Rebuild' 
+--       where Command = 'Clean/Sync/Rebuild'
+--
+--Update Commands 
+--       Set Command = 'Clean_Sync_RebuildNoTest' 
+--       where Command = 'Clean/Sync/Build'
+
+-- Original Clean command was 
+-- Insert Into Commands Values ( 4 , 'Clean' ,'ceclean.bat');
+-- For Blue, modified to just call the actual command
+update Commands Set CommandLine = 'wp clean /nobackup' where CommandID = 4
+update Commands Set CommandLine = 'Wp build /e:test' where CommandID = 8
+update Commands Set CommandLine = 'Wp build' where CommandID = 9
+
+
+
+
+--Insert Into Enlistments Values ( 1 , 'F:\Wm7SevenApp');
+Insert Into Enlistments Values ( 2 , 'E:\WM7_T2');
+Insert Into Enlistments Values ( 3 , 'F:\Wm7Main');
+Insert Into Enlistments Values ( 4 , 'E:\SevAppToolsDev1');
+Insert Into Enlistments Values ( 5 , 'E:\T2_AppPlat_Dev1');
+Insert Into Enlistments Values ( 6 , 'E:\T2_AppPlat_Dev2');
+Insert Into Enlistments Values ( 7 , 'E:\WM7_T2_AppPlat');
+
+Insert Into Enlistments Values ( 10 , 'E:\WP8_AxPlat');
+Insert Into Enlistments Values ( 11 , 'E:\Wp8_AxPlat_Himalayas');
+Insert Into Enlistments Values ( 12 , 'E:\Wp8_AxPlat_Himalayas_Everest');
+Insert Into Enlistments Values ( 13 , 'E:\Wp8_AxPlat_Himalayas_Everest_D1');
+Insert Into Enlistments Values ( 14 , 'E:\AP8AMDC_DC_L2S');
+Insert Into Enlistments Values ( 15 , 'E:\WPMain');
+
+
+
+update Enlistments  Set Path = 'E:\T2_AppPlat_Dev2'   where ID = 6
+--select * from Enlistments
+--delete  from Enlistments
+--select * from Configurations
+
+--update Enlistments  Set Path = 'E:\WP8_AxPlat'					    where Path = 'E:\WP8_AppPlat'
+--update Enlistments  Set Path = 'E:\Wp8_AxPlat_Himalayas'		    where Path = 'E:\AppPlat8AMDC'
+--update Enlistments  Set Path = 'E:\Wp8_AxPlat_Himalayas_Everest'    where Path = 'E:\AppPlat8AMDC_DC'
+--update Enlistments  Set Path = 'E:\Wp8_AxPlat_Himalayas_Everest_D1' where Path = 'E:\AppPlat8AMDCESE'
+--update Enlistments  Set Path = 'E:\WM7_T2_EPX'      where Path = 'E:\AP8AMDC_DC_L2S'
+
+--Insert Into Configurations Values ( 1 , 1 , 1 , 1 , 4 , 1 , 1 , 0);		-- F:\Wm7SevenApp  E600 ARMV7 Release   Clean
+--Insert Into Configurations Values ( 2 , 1 , 1 , 1 , 1 , 1 , 1 , 0);	    -- F:\Wm7SevenApp  E600 ARMV7 Release   Sync
+--Insert Into Configurations Values ( 3 , 1 , 1 , 1 , 2 , 1 , 1 , 0);		-- F:\Wm7SevenApp  E600 ARMV7 Release   RebuildNoTest
+--Insert Into Configurations Values ( 4 , 1 , 1 , 1 , 3 , 1 , 1 , 0);		-- F:\Wm7SevenApp  E600 ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 5 , 1 , 1 , 1 , 4 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  E600 ARMV7 Release   Clean
+Insert Into Configurations Values ( 6 , 1 , 1 , 1 , 1 , 1 , 7 , 0);	    -- E:\WM7_T2_AppPlat  E600 ARMV7 Release   Sync
+Insert Into Configurations Values ( 7 , 1 , 1 , 1 , 2 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  E600 ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 8 , 1 , 1 , 1 , 3 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  E600 ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 9 , 1 , 1 , 1 , 4 , 1 , 2 , 0);		    -- E:\WM7_T2  E600 ARMV7 Release   Clean
+Insert Into Configurations Values ( 10 , 1 , 1 , 1 , 1 , 1 , 2 , 0);	    -- E:\WM7_T2  E600 ARMV7 Release   Sync
+Insert Into Configurations Values ( 11 , 1 , 1 , 1 , 2 , 1 , 2 , 0);		-- E:\WM7_T2  E600 ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 12 , 1 , 1 , 1 , 3 , 1 , 2 , 0);		-- E:\WM7_T2  E600 ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 13 , 1 , 1 , 1 , 4 , 1 , 3 , 0);		-- F:\Wm7Main  E600 ARMV7 Release   Clean
+Insert Into Configurations Values ( 14 , 1 , 1 , 1 , 1 , 1 , 3 , 0);	    -- F:\Wm7Main  E600 ARMV7 Release   Sync
+Insert Into Configurations Values ( 15 , 1 , 1 , 1 , 2 , 1 , 3 , 0);		-- F:\Wm7Main  E600 ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 16 , 1 , 1 , 1 , 3 , 1 , 3 , 0);		-- F:\Wm7Main  E600 ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 17 , 1 , 1 , 1 , 4 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  E600 ARMV7 Release   Clean
+Insert Into Configurations Values ( 18 , 1 , 1 , 1 , 1 , 1 , 4 , 0);	    -- E:\SevAppToolsDev1  E600 ARMV7 Release   Sync
+Insert Into Configurations Values ( 19 , 1 , 1 , 1 , 2 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  E600 ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 20 , 1 , 1 , 1 , 3 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  E600 ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 21 , 1 , 1 , 1 , 4 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  E600 ARMV7 Release   Clean
+Insert Into Configurations Values ( 22 , 1 , 1 , 1 , 1 , 1 , 5 , 0);	    -- E:\T2_AppPlat_Dev1  E600 ARMV7 Release   Sync
+Insert Into Configurations Values ( 23 , 1 , 1 , 1 , 2 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  E600 ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 24 , 1 , 1 , 1 , 3 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  E600 ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 25 , 1 , 1 , 1 , 4 , 1 , 6 , 0);		-- E:\SevAppCld  E600 ARMV7 Release   Clean
+Insert Into Configurations Values ( 26 , 1 , 1 , 1 , 1 , 1 , 6 , 0);	    -- E:\SevAppCld  E600 ARMV7 Release   Sync
+Insert Into Configurations Values ( 27 , 1 , 1 , 1 , 2 , 1 , 6 , 0);		-- E:\SevAppCld  E600 ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 28 , 1 , 1 , 1 , 3 , 1 , 6 , 0);		-- E:\SevAppCld  E600 ARMV7 Release   RebuildAll
+
+-- Spark Configurations
+
+Insert Into Configurations Values ( 200 , 1 , 1 , 5 , 4 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  HTC SparkW ARMV7 Release   Clean
+Insert Into Configurations Values ( 201 , 1 , 1 , 5 , 1 , 1 , 7 , 0);	    -- E:\WM7_T2_AppPlat  HTC SparkW ARMV7 Release   Sync
+Insert Into Configurations Values ( 202 , 1 , 1 , 5 , 2 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  HTC SparkW ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 203 , 1 , 1 , 5 , 3 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  HTC SparkW ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 204 , 1 , 1 , 5 , 4 , 1 , 2 , 0);		    -- E:\WM7_T2  HTC SparkW ARMV7 Release   Clean
+Insert Into Configurations Values ( 205 , 1 , 1 , 5 , 1 , 1 , 2 , 0);	    -- E:\WM7_T2  HTC SparkW ARMV7 Release   Sync
+Insert Into Configurations Values ( 206 , 1 , 1 , 5 , 2 , 1 , 2 , 0);		-- E:\WM7_T2  HTC SparkW ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 207 , 1 , 1 , 5 , 3 , 1 , 2 , 0);		-- E:\WM7_T2  HTC SparkW ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 208 , 1 , 1 , 5 , 4 , 1 , 3 , 0);		-- F:\Wm7Main  HTC SparkW ARMV7 Release   Clean
+Insert Into Configurations Values ( 209 , 1 , 1 , 5 , 1 , 1 , 3 , 0);	    -- F:\Wm7Main  HTC SparkW ARMV7 Release   Sync
+Insert Into Configurations Values ( 210 , 1 , 1 , 5 , 2 , 1 , 3 , 0);		-- F:\Wm7Main  HTC SparkW ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 211 , 1 , 1 , 5 , 3 , 1 , 3 , 0);		-- F:\Wm7Main  HTC SparkW ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 212 , 1 , 1 , 5 , 4 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC SparkW ARMV7 Release   Clean
+Insert Into Configurations Values ( 213 , 1 , 1 , 5 , 1 , 1 , 4 , 0);	    -- E:\SevAppToolsDev1  HTC SparkW ARMV7 Release   Sync
+Insert Into Configurations Values ( 214 , 1 , 1 , 5 , 2 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC SparkW ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 215 , 1 , 1 , 5 , 3 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC SparkW ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 216 , 1 , 1 , 5 , 4 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC SparkW ARMV7 Release   Clean
+Insert Into Configurations Values ( 217 , 1 , 1 , 5 , 1 , 1 , 5 , 0);	    -- E:\T2_AppPlat_Dev1  HTC SparkW ARMV7 Release   Sync
+Insert Into Configurations Values ( 218 , 1 , 1 , 5 , 2 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC SparkW ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 219 , 1 , 1 , 5 , 3 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC SparkW ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 220 , 1 , 1 , 5 , 4 , 1 , 6 , 0);		-- E:\SevAppCld  HTC SparkW ARMV7 Release   Clean
+Insert Into Configurations Values ( 221 , 1 , 1 , 5 , 1 , 1 , 6 , 0);	    -- E:\SevAppCld  HTC SparkW ARMV7 Release   Sync
+Insert Into Configurations Values ( 222 , 1 , 1 , 5 , 2 , 1 , 6 , 0);		-- E:\SevAppCld  HTC SparkW ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 223 , 1 , 1 , 5 , 3 , 1 , 6 , 0);		-- E:\SevAppCld  HTC SparkW ARMV7 Release   RebuildAll
+
+-- Mazaa Configurations
+
+Insert Into Configurations Values ( 250 , 1 , 1 , 6 , 4 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  HTC Mazaa ARMV7 Release   Clean
+Insert Into Configurations Values ( 251 , 1 , 1 , 6 , 1 , 1 , 7 , 0);	    -- E:\WM7_T2_AppPlat  HTC Mazaa ARMV7 Release   Sync
+Insert Into Configurations Values ( 252 , 1 , 1 , 6 , 2 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  HTC Mazaa ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 253 , 1 , 1 , 6 , 3 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  HTC Mazaa ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 254 , 1 , 1 , 6 , 4 , 1 , 2 , 0);		    -- E:\WM7_T2  HTC Mazaa ARMV7 Release   Clean
+Insert Into Configurations Values ( 255 , 1 , 1 , 6 , 1 , 1 , 2 , 0);	    -- E:\WM7_T2  HTC Mazaa ARMV7 Release   Sync
+Insert Into Configurations Values ( 256 , 1 , 1 , 6 , 2 , 1 , 2 , 0);		-- E:\WM7_T2  HTC Mazaa ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 257 , 1 , 1 , 6 , 3 , 1 , 2 , 0);		-- E:\WM7_T2  HTC Mazaa ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 258 , 1 , 1 , 6 , 4 , 1 , 3 , 0);		-- F:\Wm7Main  HTC Mazaa ARMV7 Release   Clean
+Insert Into Configurations Values ( 259 , 1 , 1 , 6 , 1 , 1 , 3 , 0);	    -- F:\Wm7Main  HTC Mazaa ARMV7 Release   Sync
+Insert Into Configurations Values ( 260 , 1 , 1 , 6 , 2 , 1 , 3 , 0);		-- F:\Wm7Main  HTC Mazaa ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 261 , 1 , 1 , 6 , 3 , 1 , 3 , 0);		-- F:\Wm7Main  HTC Mazaa ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 262 , 1 , 1 , 6 , 4 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC Mazaa ARMV7 Release   Clean
+Insert Into Configurations Values ( 263 , 1 , 1 , 6 , 1 , 1 , 4 , 0);	    -- E:\SevAppToolsDev1  HTC Mazaa ARMV7 Release   Sync
+Insert Into Configurations Values ( 264 , 1 , 1 , 6 , 2 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC Mazaa ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 265 , 1 , 1 , 6 , 3 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC Mazaa ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 266 , 1 , 1 , 6 , 4 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC Mazaa ARMV7 Release   Clean
+Insert Into Configurations Values ( 267 , 1 , 1 , 6 , 1 , 1 , 5 , 0);	    -- E:\T2_AppPlat_Dev1  HTC Mazaa ARMV7 Release   Sync
+Insert Into Configurations Values ( 268 , 1 , 1 , 6 , 2 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC Mazaa ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 269 , 1 , 1 , 6 , 3 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC Mazaa ARMV7 Release   RebuildAll
+
+Insert Into Configurations Values ( 270 , 1 , 1 , 6 , 4 , 1 , 6 , 0);		-- E:\SevAppCld  HTC Mazaa ARMV7 Release   Clean
+Insert Into Configurations Values ( 271 , 1 , 1 , 6 , 1 , 1 , 6 , 0);	    -- E:\SevAppCld  HTC Mazaa ARMV7 Release   Sync
+Insert Into Configurations Values ( 272 , 1 , 1 , 6 , 2 , 1 , 6 , 0);		-- E:\SevAppCld  HTC Mazaa ARMV7 Release   RebuildNoTest
+Insert Into Configurations Values ( 273 , 1 , 1 , 6 , 3 , 1 , 6 , 0);		-- E:\SevAppCld  HTC Mazaa ARMV7 Release   RebuildAll
+
+
+
+
+
+-- XDE Configurations
+
+--Insert Into Configurations Values ( 31 , 1 , 1 , 2 , 4 , 1 , 1 , 0);		-- F:\Wm7SevenApp  Windows Phone Emulator x86 Release   Clean
+--Insert Into Configurations Values ( 32 , 1 , 1 , 2 , 1 , 1 , 1 , 0);	    -- F:\Wm7SevenApp  Windows Phone Emulator x86 Release   Sync
+--Insert Into Configurations Values ( 33 , 1 , 1 , 2 , 2 , 1 , 1 , 0);		-- F:\Wm7SevenApp  Windows Phone Emulator x86 Release   RebuildNoTest
+--Insert Into Configurations Values ( 34 , 1 , 1 , 2 , 3 , 1 , 1 , 0);		-- F:\Wm7SevenApp  Windows Phone Emulator x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 35 , 1 , 1 , 2 , 4 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Release   Clean
+Insert Into Configurations Values ( 36 , 1 , 1 , 2 , 1 , 1 , 7 , 0);	    -- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Release   Sync
+Insert Into Configurations Values ( 37 , 1 , 1 , 2 , 2 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 38 , 1 , 1 , 2 , 3 , 1 , 7 , 1);		-- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 39 , 1 , 1 , 2 , 4 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Release   Clean
+Insert Into Configurations Values ( 40 , 1 , 1 , 2 , 1 , 1 , 2 , 0);	    -- E:\WM7_T2  Windows Phone Emulator x86 Release   Sync
+Insert Into Configurations Values ( 41 , 1 , 1 , 2 , 2 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 42 , 1 , 1 , 2 , 3 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 43 , 1 , 1 , 2 , 4 , 1 , 3 , 0);		-- F:\Wm7Main  Windows Phone Emulator x86 Release   Clean
+Insert Into Configurations Values ( 44 , 1 , 1 , 2 , 1 , 1 , 3 , 0);	    -- F:\Wm7Main  Windows Phone Emulator x86 Release   Sync
+Insert Into Configurations Values ( 45 , 1 , 1 , 2 , 2 , 1 , 3 , 0);		-- F:\Wm7Main  Windows Phone Emulator x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 46 , 1 , 1 , 2 , 3 , 1 , 3 , 0);		-- F:\Wm7Main  Windows Phone Emulator x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 47 , 1 , 1 , 2 , 4 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  Windows Phone Emulator x86 Release   Clean
+Insert Into Configurations Values ( 48 , 1 , 1 , 2 , 1 , 1 , 4 , 0);	    -- E:\SevAppToolsDev1  Windows Phone Emulator x86 Release   Sync
+Insert Into Configurations Values ( 49 , 1 , 1 , 2 , 2 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  Windows Phone Emulator x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 50 , 1 , 1 , 2 , 3 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  Windows Phone Emulator x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 51 , 1 , 1 , 2 , 4 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Release   Clean
+Insert Into Configurations Values ( 52 , 1 , 1 , 2 , 1 , 1 , 5 , 0);	    -- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Release   Sync
+Insert Into Configurations Values ( 53 , 1 , 1 , 2 , 2 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 54 , 1 , 1 , 2 , 3 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 55 , 1 , 1 , 2 , 4 , 1 , 6 , 0);		-- E:\SevAppCld  Windows Phone Emulator x86 Release   Clean
+Insert Into Configurations Values ( 56 , 1 , 1 , 2 , 1 , 1 , 6 , 0);	    -- E:\SevAppCld  Windows Phone Emulator x86 Release   Sync
+Insert Into Configurations Values ( 57 , 1 , 1 , 2 , 2 , 1 , 6 , 0);		-- E:\SevAppCld  Windows Phone Emulator x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 58 , 1 , 1 , 2 , 3 , 1 , 6 , 0);		-- E:\SevAppCld  Windows Phone Emulator x86 Release   RebuildAll
+
+-- CEPC Configurations
+
+Insert Into Configurations Values ( 60 , 1 , 1 , 4 , 4 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  CEPC x86 Release   Clean
+Insert Into Configurations Values ( 61 , 1 , 1 , 4 , 1 , 1 , 7 , 0);	    -- E:\WM7_T2_AppPlat  CEPC x86 Release   Sync
+Insert Into Configurations Values ( 62 , 1 , 1 , 4 , 2 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  CEPC x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 63 , 1 , 1 , 4 , 3 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  CEPC x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 64 , 1 , 1 , 4 , 4 , 1 , 6 , 0);		-- E:\SevAppCld  CEPC x86 Release   Clean
+Insert Into Configurations Values ( 65 , 1 , 1 , 4 , 1 , 1 , 6 , 0);	    -- E:\SevAppCld  CEPC x86 Release   Sync
+Insert Into Configurations Values ( 66 , 1 , 1 , 4 , 2 , 1 , 6 , 0);		-- E:\SevAppCld  CEPC x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 67 , 1 , 1 , 4 , 3 , 1 , 6 , 1);		-- E:\SevAppCld  CEPC x86 Release   RebuildAll
+
+Insert Into Configurations Values ( 68 , 1 , 1 , 4 , 4 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  CEPC x86 Release   Clean
+Insert Into Configurations Values ( 69 , 1 , 1 , 4 , 1 , 1 , 5 , 0);	    -- E:\T2_AppPlat_Dev1  CEPC x86 Release   Sync
+Insert Into Configurations Values ( 70 , 1 , 1 , 4 , 2 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  CEPC x86 Release   RebuildNoTest
+Insert Into Configurations Values ( 71 , 1 , 1 , 4 , 3 , 1 , 5 , 1);		-- E:\T2_AppPlat_Dev1  CEPC x86 Release   RebuildAll
+
+
+
+-- Sync/Clean/Rebuild
+
+Insert Into Configurations Values ( 80 , 1 , 1 , 4 , 5 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     CEPC x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 81 , 1 , 1 , 4 , 5 , 1 , 6 , 0);		-- E:\SevAppCld    CEPC x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 82 , 1 , 1 , 4 , 5 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  CEPC x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 95 , 1 , 1 , 4 , 5 , 1 , 2 , 0);		-- E:\WM7_T2  CEPC x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 100 , 1 , 1 , 4 , 5 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  CEPC x86 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 86 , 1 , 1 , 2 , 5 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     Windows Phone Emulator x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 87 , 1 , 1 , 2 , 5 , 1 , 6 , 0);		-- E:\SevAppCld    Windows Phone Emulator x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 88 , 1 , 1 , 2 , 5 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 96 , 1 , 1 , 2 , 5 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 101 , 1 , 1 , 2 , 5 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  Windows Phone Emulator x86 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 115 , 1 , 1 , 1 , 5 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     E600 ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 116 , 1 , 1 , 1 , 5 , 1 , 6 , 0);		-- E:\SevAppCld    E600 ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 117 , 1 , 1 , 1 , 5 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  E600 ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 118 , 1 , 1 , 1 , 5 , 1 , 2 , 0);		-- E:\WM7_T2  E600 ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 119 , 1 , 1 , 1 , 5 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  E600 ARMV7 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 120 , 1 , 1 , 5 , 5 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     HTC SparkW ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 121 , 1 , 1 , 5 , 5 , 1 , 6 , 0);		-- E:\SevAppCld    HTC SparkW ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 122 , 1 , 1 , 5 , 5 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC SparkW ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 123 , 1 , 1 , 5 , 5 , 1 , 2 , 0);		-- E:\WM7_T2  HTC SparkW ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 124 , 1 , 1 , 5 , 5 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC SparkW ARMV7 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 125 , 1 , 1 , 6 , 5 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     HTC Mazaa ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 126 , 1 , 1 , 6 , 5 , 1 , 6 , 0);		-- E:\SevAppCld    HTC Mazaa ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 127 , 1 , 1 , 6 , 5 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC Mazaa ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 128 , 1 , 1 , 6 , 5 , 1 , 2 , 0);		-- E:\WM7_T2  HTC Mazaa ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 129 , 1 , 1 , 6 , 5 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC Mazaa ARMV7 Release  Clean/Sync/Rebuild
+
+
+
+
+-- Sync/Clean/RebuildNoTest
+
+Insert Into Configurations Values ( 83 , 1 , 1 , 4 , 6 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     CEPC x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 84 , 1 , 1 , 4 , 6 , 1 , 6 , 0);		-- E:\SevAppCld    CEPC x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 85 , 1 , 1 , 4 , 6 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  CEPC x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 97 , 1 , 1 , 4 , 6 , 1 , 2 , 0);		-- E:\WM7_T2  CEPC x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 103 , 1 , 1 , 4 , 6 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  CEPC x86 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 90 , 1 , 1 , 2 , 6 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     Windows Phone Emulator x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 91 , 1 , 1 , 2 , 6 , 1 , 6 , 0);		-- E:\SevAppCld    Windows Phone Emulator x86 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 92 , 1 , 1 , 2 , 6 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 98 , 1 , 1 , 2 , 6 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 104 , 1 , 1 , 2 , 6 , 1 , 4 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 110 , 1 , 1 , 1 , 6 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     E600 ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 111 , 1 , 1 , 1 , 6 , 1 , 6 , 0);		-- E:\SevAppCld    E600 ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 112 , 1 , 1 , 1 , 6 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  E600 ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 113 , 1 , 1 , 1 , 6 , 1 , 2 , 0);		-- E:\WM7_T2  E600 ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 114 , 1 , 1 , 1 , 6 , 1 , 4 , 0);		-- E:\T2_AppPlat_Dev1  E600 ARMV7 Release  Clean/Sync/Rebuild
+
+
+Insert Into Configurations Values ( 150 , 1 , 1 , 5 , 6 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     HTC SparkW ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 151 , 1 , 1 , 5 , 6 , 1 , 6 , 0);		-- E:\SevAppCld    HTC SparkW ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 152 , 1 , 1 , 5 , 6 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC SparkW ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 153 , 1 , 1 , 5 , 6 , 1 , 2 , 0);		-- E:\WM7_T2  HTC SparkW ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 154 , 1 , 1 , 5 , 6 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC SparkW ARMV7 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 155 , 1 , 1 , 6 , 6 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     HTC Mazaa ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 156 , 1 , 1 , 6 , 6 , 1 , 6 , 0);		-- E:\SevAppCld    HTC Mazaa ARMV7 Release   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 157 , 1 , 1 , 6 , 6 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  HTC Mazaa ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 158 , 1 , 1 , 6 , 6 , 1 , 2 , 0);		-- E:\WM7_T2  HTC Mazaa ARMV7 Release  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 159 , 1 , 1 , 6 , 6 , 1 , 4 , 0);		-- E:\SevAppToolsDev1  HTC Mazaa ARMV7 Release  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 170 , 1 , 1 , 3 , 6 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     Windows Phone Emulator x86 Checked   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 171 , 1 , 1 , 3 , 6 , 1 , 6 , 0);		-- E:\SevAppCld    Windows Phone Emulator x86 Checked   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 172 , 1 , 1 , 3 , 6 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Checked  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 173 , 1 , 1 , 3 , 6 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Checked  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 174 , 1 , 1 , 3 , 6 , 1 , 4 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Checked  Clean/Sync/Rebuild
+
+Insert Into Configurations Values ( 175 , 1 , 1 , 3 , 5 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat     Windows Phone Emulator x86 Checked   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 176 , 1 , 1 , 3 , 5 , 1 , 6 , 0);		-- E:\SevAppCld    Windows Phone Emulator x86 Checked   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 177 , 1 , 1 , 3 , 5 , 1 , 5 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Checked  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 178 , 1 , 1 , 3 , 5 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Checked  Clean/Sync/Rebuild
+Insert Into Configurations Values ( 179 , 1 , 1 , 3 , 5 , 1 , 4 , 0);		-- E:\T2_AppPlat_Dev1  Windows Phone Emulator x86 Checked  Clean/Sync/Rebuild
+
+
+Insert Into Configurations Values ( 180 , 1 , 1 , 3 , 4 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Checked   Clean
+Insert Into Configurations Values ( 181 , 1 , 1 , 3 , 1 , 1 , 7 , 0);	    -- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Checked   Sync
+Insert Into Configurations Values ( 182 , 1 , 1 , 3 , 2 , 1 , 7 , 0);		-- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Checked   RebuildNoTest
+Insert Into Configurations Values ( 183 , 1 , 1 , 3 , 3 , 1 , 7 , 1);		-- E:\WM7_T2_AppPlat  Windows Phone Emulator x86 Checked   RebuildAll
+
+Insert Into Configurations Values ( 184 , 1 , 1 , 3 , 4 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Checked   Clean
+Insert Into Configurations Values ( 185 , 1 , 1 , 3 , 1 , 1 , 2 , 0);	    -- E:\WM7_T2  Windows Phone Emulator x86 Checked   Sync
+Insert Into Configurations Values ( 186 , 1 , 1 , 3 , 2 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Checked   RebuildNoTest
+Insert Into Configurations Values ( 187 , 1 , 1 , 3 , 3 , 1 , 2 , 0);		-- E:\WM7_T2  Windows Phone Emulator x86 Checked   RebuildAll
+
+-- Apollo configurations
+
+Insert Into Configurations Values ( 300 , 1 , 1 , 10 , 4 , 10 , 10 , 0);		-- E:\WP8_AxPlat device  x86fre   Clean
+Insert Into Configurations Values ( 301 , 1 , 1 , 15 , 4 , 10 , 10 , 0);		-- E:\WP8_AxPlat desktop x86fre   Clean
+Insert Into Configurations Values ( 302 , 1 , 1 , 10 , 7 , 10 , 10 , 0);	    -- E:\WP8_AxPlat device  x86fre   WpSync
+Insert Into Configurations Values ( 303 , 1 , 1 , 15 , 7 , 10 , 10 , 0);	    -- E:\WP8_AxPlat desktop x86fre   WpSync
+Insert Into Configurations Values ( 304 , 1 , 1 , 10 , 8 , 10 , 10 , 0);		-- E:\WP8_AxPlat device  x86fre   WpRebuildNoTest
+Insert Into Configurations Values ( 305 , 1 , 1 , 10 , 9 , 10 , 10 , 0);		-- E:\WP8_AxPlat device  x86fre   WpRebuildAll
+Insert Into Configurations Values ( 306 , 1 , 1 , 15 , 9 , 10 , 10 , 0);		-- E:\WP8_AxPlat desktop x86fre   WpRebuildAll
+
+
+
+Insert Into Configurations Values ( 310 , 1 , 1 , 10 , 4 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86fre   Clean
+Insert Into Configurations Values ( 311 , 1 , 1 , 15 , 4 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86fre   Clean
+Insert Into Configurations Values ( 312 , 1 , 1 , 10 , 7 , 10 , 11 , 0);	    -- E:\Wp8_AxPlat_Himalayas device x86fre   WpSync
+Insert Into Configurations Values ( 313 , 1 , 1 , 15 , 7 , 10 , 11 , 0);	    -- E:\Wp8_AxPlat_Himalayas device x86fre   WpSync
+Insert Into Configurations Values ( 314 , 1 , 1 , 10 , 8 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86fre   WpRebuildNoTest
+Insert Into Configurations Values ( 315 , 1 , 1 , 10 , 9 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86fre   WpRebuildAll
+Insert Into Configurations Values ( 316 , 1 , 1 , 15 , 9 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86fre   WpRebuildAll
+
+Insert Into Configurations Values ( 320 , 1 , 1 , 10 , 4 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device  x86fre   Clean
+Insert Into Configurations Values ( 321 , 1 , 1 , 15 , 4 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest desktop x86fre   Clean
+Insert Into Configurations Values ( 322 , 1 , 1 , 15 , 7 , 10 , 12 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest device  x86fre   WpSync
+Insert Into Configurations Values ( 323 , 1 , 1 , 10 , 7 , 10 , 12 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest desktop x86fre   WpSync
+Insert Into Configurations Values ( 324 , 1 , 1 , 10 , 8 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device  x86fre   WpRebuildNoTest
+Insert Into Configurations Values ( 325 , 1 , 1 , 10 , 9 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device  x86fre   WpRebuildAll
+Insert Into Configurations Values ( 326 , 1 , 1 , 15 , 9 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest desktop x86fre   WpRebuildAll
+
+
+Insert Into Configurations Values ( 330 , 1 , 1 , 10 , 4 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device  x86fre   Clean
+Insert Into Configurations Values ( 331 , 1 , 1 , 15 , 4 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 desktop x86fre   Clean
+Insert Into Configurations Values ( 332 , 1 , 1 , 10 , 7 , 10 , 13 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest_D1 device  x86fre   WpSync
+Insert Into Configurations Values ( 333 , 1 , 1 , 15 , 7 , 10 , 13 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest_D1 desktop x86fre   WpSync
+Insert Into Configurations Values ( 334 , 1 , 1 , 10 , 8 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device  x86fre   WpRebuildNoTest
+Insert Into Configurations Values ( 335 , 1 , 1 , 10 , 9 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device  x86fre   WpRebuildAll
+Insert Into Configurations Values ( 336 , 1 , 1 , 15 , 9 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 desktop x86fre   WpRebuildAll
+
+Insert Into Configurations Values ( 340 , 1 , 1 , 10 , 4 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device x86fre   Clean
+Insert Into Configurations Values ( 341 , 1 , 1 , 15 , 4 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S desktop x86fre   Clean
+Insert Into Configurations Values ( 342 , 1 , 1 , 10 , 7 , 10 , 14 , 0);	    -- E:\AP8AMDC_DC_L2S device x86fre   WpSync
+Insert Into Configurations Values ( 343 , 1 , 1 , 15 , 7 , 10 , 14 , 0);	    -- E:\AP8AMDC_DC_L2S desktop x86fre   WpSync
+Insert Into Configurations Values ( 344 , 1 , 1 , 10 , 8 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device x86fre   WpRebuildNoTest
+Insert Into Configurations Values ( 345 , 1 , 1 , 10 , 9 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device x86fre   WpRebuildAll
+Insert Into Configurations Values ( 346 , 1 , 1 , 15 , 9 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S desktop x86fre   WpRebuildAll
+
+Insert Into Configurations Values ( 350 , 1 , 1 , 10 , 4 , 10 , 15 , 0);		-- E:\WpMain device  x86fre   Clean
+Insert Into Configurations Values ( 351 , 1 , 1 , 15 , 4 , 10 , 15 , 0);		-- E:\WpMain desktop x86fre   Clean
+Insert Into Configurations Values ( 352 , 1 , 1 , 10 , 7 , 10 , 15 , 0);	    -- E:\WpMain device  x86fre   WpSync
+Insert Into Configurations Values ( 353 , 1 , 1 , 15 , 7 , 10 , 15 , 0);	    -- E:\WpMain desktop x86fre   WpSync
+Insert Into Configurations Values ( 354 , 1 , 1 , 10 , 8 , 10 , 15 , 0);		-- E:\WpMain device  x86fre   WpRebuildNoTest
+Insert Into Configurations Values ( 355 , 1 , 1 , 10 , 9 , 10 , 15 , 0);		-- E:\WpMain device  x86fre   WpRebuildAll
+Insert Into Configurations Values ( 356 , 1 , 1 , 15 , 9 , 10 , 15 , 0);		-- E:\WpMain desktop x86fre   WpRebuildAll
+
+
+
+-- Chk builds
+
+Insert Into Configurations Values ( 360 , 1 , 1 , 11 , 4 , 10 , 10 , 0);		-- E:\WP8_AppPlat device x86chk   Clean
+Insert Into Configurations Values ( 361 , 1 , 1 , 14 , 4 , 10 , 10 , 0);		-- E:\WP8_AppPlat desktop x86chk   Clean
+Insert Into Configurations Values ( 362 , 1 , 1 , 11 , 7 , 10 , 10 , 0);	    -- E:\WP8_AppPlat device x86chk   WpSync
+Insert Into Configurations Values ( 363 , 1 , 1 , 14 , 7 , 10 , 10 , 0);	    -- E:\WP8_AppPlat desktop x86chk   WpSync
+Insert Into Configurations Values ( 364 , 1 , 1 , 11 , 8 , 10 , 10 , 0);		-- E:\WP8_AppPlat device x86chk   WpRebuildNoTest
+Insert Into Configurations Values ( 365 , 1 , 1 , 11 , 9 , 10 , 10 , 0);		-- E:\WP8_AppPlat device x86chk   WpRebuildAll
+Insert Into Configurations Values ( 366 , 1 , 1 , 14 , 9 , 10 , 10 , 0);		-- E:\WP8_AppPlat desktop x86chk   WpRebuildAll
+
+Insert Into Configurations Values ( 370 , 1 , 1 , 11 , 4 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86chk   Clean
+Insert Into Configurations Values ( 371 , 1 , 1 , 14 , 4 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas desktop x86chk   Clean
+Insert Into Configurations Values ( 372 , 1 , 1 , 11 , 7 , 10 , 11 , 0);	    -- E:\Wp8_AxPlat_Himalayas device x86chk   WpSync
+Insert Into Configurations Values ( 373 , 1 , 1 , 14 , 7 , 10 , 11 , 0);	    -- E:\Wp8_AxPlat_Himalayas desktop x86chk   WpSync
+Insert Into Configurations Values ( 374 , 1 , 1 , 11 , 8 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86chk   WpRebuildNoTest
+Insert Into Configurations Values ( 375 , 1 , 1 , 11 , 9 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device x86chk   WpRebuildAll
+Insert Into Configurations Values ( 376 , 1 , 1 , 14 , 9 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas desktop x86chk   WpRebuildAll
+
+Insert Into Configurations Values ( 380 , 1 , 1 , 11 , 4 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device x86chk   Clean
+Insert Into Configurations Values ( 381 , 1 , 1 , 14 , 4 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest desktop x86chk   Clean
+Insert Into Configurations Values ( 382 , 1 , 1 , 11 , 7 , 10 , 12 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest device x86chk   WpSync
+Insert Into Configurations Values ( 383 , 1 , 1 , 14 , 7 , 10 , 12 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest desktop x86chk   WpSync
+Insert Into Configurations Values ( 384 , 1 , 1 , 11 , 8 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device x86chk   WpRebuildNoTest
+Insert Into Configurations Values ( 385 , 1 , 1 , 11 , 9 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device x86chk   WpRebuildAll
+Insert Into Configurations Values ( 386 , 1 , 1 , 14 , 9 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest desktop x86chk   WpRebuildAll
+
+
+Insert Into Configurations Values ( 390 , 1 , 1 , 11 , 4 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device x86chk   Clean
+Insert Into Configurations Values ( 391 , 1 , 1 , 14 , 4 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 desktop x86chk   Clean
+Insert Into Configurations Values ( 392 , 1 , 1 , 11 , 7 , 10 , 13 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest_D1 device x86chk   WpSync
+Insert Into Configurations Values ( 393 , 1 , 1 , 14 , 7 , 10 , 13 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest_D1 desktop x86chk   WpSync
+Insert Into Configurations Values ( 394 , 1 , 1 , 11 , 8 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device x86chk   WpRebuildNoTest
+Insert Into Configurations Values ( 395 , 1 , 1 , 11 , 9 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device x86chk   WpRebuildAll
+Insert Into Configurations Values ( 396 , 1 , 1 , 14 , 9 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 desktop x86chk   WpRebuildAll
+
+Insert Into Configurations Values ( 400 , 1 , 1 , 11 , 4 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device x86chk   Clean
+Insert Into Configurations Values ( 401 , 1 , 1 , 14 , 4 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S desktop x86chk   Clean
+Insert Into Configurations Values ( 442 , 1 , 1 , 11 , 7 , 10 , 14 , 0);	    -- E:\AP8AMDC_DC_L2S device x86chk   WpSync
+Insert Into Configurations Values ( 443 , 1 , 1 , 14 , 7 , 10 , 14 , 0);	    -- E:\AP8AMDC_DC_L2S desktop x86chk   WpSync
+Insert Into Configurations Values ( 444 , 1 , 1 , 11 , 8 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device x86chk   WpRebuildNoTest
+Insert Into Configurations Values ( 445 , 1 , 1 , 11 , 9 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device x86chk   WpRebuildAll
+Insert Into Configurations Values ( 446 , 1 , 1 , 14 , 9 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S desktop x86chk   WpRebuildAll
+
+Insert Into Configurations Values ( 450 , 1 , 1 , 11 , 4 , 10 , 15 , 0);		-- E:\WpMain device x86chk   Clean
+Insert Into Configurations Values ( 451 , 1 , 1 , 14 , 4 , 10 , 15 , 0);		-- E:\WpMain desktop x86chk   Clean
+Insert Into Configurations Values ( 452 , 1 , 1 , 11 , 7 , 10 , 15 , 0);	    -- E:\WpMain device x86chk   WpSync
+Insert Into Configurations Values ( 453 , 1 , 1 , 14 , 7 , 10 , 15 , 0);	    -- E:\WpMain desktop x86chk   WpSync
+Insert Into Configurations Values ( 454 , 1 , 1 , 11 , 8 , 10 , 15 , 0);		-- E:\WpMain device x86chk   WpRebuildNoTest
+Insert Into Configurations Values ( 455 , 1 , 1 , 11 , 9 , 10 , 15 , 0);		-- E:\WpMain device x86chk   WpRebuildAll
+Insert Into Configurations Values ( 456 , 1 , 1 , 14 , 9 , 10 , 15 , 0);		-- E:\WpMain desktop x86chk   WpRebuildAll
+
+
+-- arm fre configurations
+
+Insert Into Configurations Values ( 500 , 1 , 1 , 12 , 4 , 10 , 10 , 0);		-- E:\WP8_AppPlat device armfre   Clean
+Insert Into Configurations Values ( 501 , 1 , 1 , 12 , 7 , 10 , 10 , 0);	    -- E:\WP8_AppPlat device armfre   WpSync
+Insert Into Configurations Values ( 502 , 1 , 1 , 12 , 8 , 10 , 10 , 0);		-- E:\WP8_AppPlat device armfre   WpRebuildNoTest
+Insert Into Configurations Values ( 503 , 1 , 1 , 12 , 9 , 10 , 10 , 0);		-- E:\WP8_AppPlat device armfre   WpRebuildAll
+
+Insert Into Configurations Values ( 510 , 1 , 1 , 12 , 4 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device armfre   Clean
+Insert Into Configurations Values ( 511 , 1 , 1 , 12 , 7 , 10 , 11 , 0);	    -- E:\Wp8_AxPlat_Himalayas device armfre   WpSync
+Insert Into Configurations Values ( 512 , 1 , 1 , 12 , 8 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device armfre   WpRebuildNoTest
+Insert Into Configurations Values ( 513 , 1 , 1 , 12 , 9 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device armfre   WpRebuildAll
+
+Insert Into Configurations Values ( 520 , 1 , 1 , 12 , 4 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device armfre   Clean
+Insert Into Configurations Values ( 521 , 1 , 1 , 12 , 7 , 10 , 12 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest device armfre   WpSync
+Insert Into Configurations Values ( 522 , 1 , 1 , 12 , 8 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device armfre   WpRebuildNoTest
+Insert Into Configurations Values ( 523 , 1 , 1 , 12 , 9 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device armfre   WpRebuildAll
+
+
+Insert Into Configurations Values ( 530 , 1 , 1 , 12 , 4 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armfre   Clean
+Insert Into Configurations Values ( 531 , 1 , 1 , 12 , 7 , 10 , 13 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armfre   WpSync
+Insert Into Configurations Values ( 532 , 1 , 1 , 12 , 8 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armfre   WpRebuildNoTest
+Insert Into Configurations Values ( 533 , 1 , 1 , 12 , 9 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armfre   WpRebuildAll
+
+Insert Into Configurations Values ( 540 , 1 , 1 , 12 , 4 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device armfre   Clean
+Insert Into Configurations Values ( 541 , 1 , 1 , 12 , 7 , 10 , 14 , 0);	    -- E:\AP8AMDC_DC_L2S device armfre   WpSync
+Insert Into Configurations Values ( 542 , 1 , 1 , 12 , 8 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device armfre   WpRebuildNoTest
+Insert Into Configurations Values ( 543 , 1 , 1 , 12 , 9 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device armfre   WpRebuildAll
+
+Insert Into Configurations Values ( 550 , 1 , 1 , 12 , 4 , 10 , 15 , 0);		-- E:\WpMain device armfre   Clean
+Insert Into Configurations Values ( 551 , 1 , 1 , 12 , 7 , 10 , 15 , 0);	    -- E:\WpMain device armfre   WpSync
+Insert Into Configurations Values ( 552 , 1 , 1 , 12 , 8 , 10 , 15 , 0);		-- E:\WpMain device armfre   WpRebuildNoTest
+Insert Into Configurations Values ( 553 , 1 , 1 , 12 , 9 , 10 , 15 , 0);		-- E:\WpMain device armfre   WpRebuildAll
+
+
+
+--arm chk configurations
+
+
+Insert Into Configurations Values ( 600 , 1 , 1 , 13 , 4 , 10 , 10 , 0);		-- E:\WP8_AppPlat device armchk   Clean
+Insert Into Configurations Values ( 601 , 1 , 1 , 13 , 7 , 10 , 10 , 0);	    -- E:\WP8_AppPlat device armchk   WpSync
+Insert Into Configurations Values ( 602 , 1 , 1 , 13 , 8 , 10 , 10 , 0);		-- E:\WP8_AppPlat device armchk   WpRebuildNoTest
+Insert Into Configurations Values ( 603 , 1 , 1 , 13 , 9 , 10 , 10 , 0);		-- E:\WP8_AppPlat device armchk   WpRebuildAll
+
+Insert Into Configurations Values ( 604 , 1 , 1 , 13 , 4 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device armchk   Clean
+Insert Into Configurations Values ( 605 , 1 , 1 , 13 , 7 , 10 , 11 , 0);	    -- E:\Wp8_AxPlat_Himalayas device armchk   WpSync
+Insert Into Configurations Values ( 606 , 1 , 1 , 13 , 8 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device armchk   WpRebuildNoTest
+Insert Into Configurations Values ( 607 , 1 , 1 , 13 , 9 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas device armchk   WpRebuildAll
+
+Insert Into Configurations Values ( 608 , 1 , 1 , 13 , 4 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device armchk   Clean
+Insert Into Configurations Values ( 609 , 1 , 1 , 13 , 7 , 10 , 12 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest device armchk   WpSync
+Insert Into Configurations Values ( 610 , 1 , 1 , 13 , 8 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device armchk   WpRebuildNoTest
+Insert Into Configurations Values ( 611 , 1 , 1 , 13 , 9 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest device armchk   WpRebuildAll
+
+
+Insert Into Configurations Values ( 612 , 1 , 1 , 13 , 4 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armchk   Clean
+Insert Into Configurations Values ( 613 , 1 , 1 , 13 , 7 , 10 , 13 , 0);	    -- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armchk   WpSync
+Insert Into Configurations Values ( 614 , 1 , 1 , 13 , 8 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armchk   WpRebuildNoTest
+Insert Into Configurations Values ( 615 , 1 , 1 , 13 , 9 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1 device armchk   WpRebuildAll
+
+Insert Into Configurations Values ( 616 , 1 , 1 , 13 , 4 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device armchk   Clean
+Insert Into Configurations Values ( 617 , 1 , 1 , 13 , 7 , 10 , 14 , 0);	    -- E:\AP8AMDC_DC_L2S device armchk   WpSync
+Insert Into Configurations Values ( 618 , 1 , 1 , 13 , 8 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device armchk   WpRebuildNoTest
+Insert Into Configurations Values ( 619 , 1 , 1 , 13 , 9 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S device armchk   WpRebuildAll
+
+Insert Into Configurations Values ( 620 , 1 , 1 , 13 , 4 , 10 , 15 , 0);		-- E:\WpMain device armchk   Clean
+Insert Into Configurations Values ( 621 , 1 , 1 , 13 , 7 , 10 , 15 , 0);	    -- E:\WpMain device armchk   WpSync
+Insert Into Configurations Values ( 622 , 1 , 1 , 13 , 8 , 10 , 15 , 0);		-- E:\WpMain device armchk   WpRebuildNoTest
+Insert Into Configurations Values ( 623 , 1 , 1 , 13 , 9 , 10 , 15 , 0);		-- E:\WpMain device armchk   WpRebuildAll
+
+
+-- Clean/Sync/Build configurations
+
+
+
+Insert Into Configurations Values ( 700 , 1 , 1 , 10 , 10 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device  x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 701 , 1 , 1 , 15 , 10 , 10 , 10 , 0);		-- E:\WP8_AxPlat		desktop x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 702 , 1 , 1 , 10 , 11 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device  x86fre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 703 , 1 , 1 , 10 , 10 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device  x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 704 , 1 , 1 , 15 , 10 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		desktop x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 705 , 1 , 1 , 10 , 11 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device  x86fre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 706 , 1 , 1 , 10 , 10 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device  x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 707 , 1 , 1 , 15 , 10 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	desktop x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 708 , 1 , 1 , 10 , 11 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device  x86fre   Clean/Sync/RebuildNoTest
+
+Insert Into Configurations Values ( 710 , 1 , 1 , 10 , 10 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device  x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 711 , 1 , 1 , 15 , 10 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	desktop x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 712 , 1 , 1 , 10 , 11 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device  x86fre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 713 , 1 , 1 , 10 , 10 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device  x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 714 , 1 , 1 , 15 , 10 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	desktop x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 715 , 1 , 1 , 10 , 11 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device  x86fre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 716 , 1 , 1 , 10 , 10 , 10 , 15 , 0);		-- E:\WpMain			device x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 717 , 1 , 1 , 15 , 10 , 10 , 15 , 0);		-- E:\WpMain			desktop x86fre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 718 , 1 , 1 , 10 , 11 , 10 , 15 , 0);		-- E:\WpMain			device x86fre   Clean/Sync/RebuildNoTest
+
+-- chk build configurations
+
+Insert Into Configurations Values ( 720 , 1 , 1 , 11 , 10 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 721 , 1 , 1 , 14 , 10 , 10 , 10 , 0);		-- E:\WP8_AxPlat		desktop x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 722 , 1 , 1 , 11 , 11 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device x86chk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 723 , 1 , 1 , 11 , 10 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 724 , 1 , 1 , 14 , 10 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		desktop x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 725 , 1 , 1 , 11 , 11 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device x86chk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 726 , 1 , 1 , 11 , 10 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 727 , 1 , 1 , 14 , 10 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	desktop x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 728 , 1 , 1 , 11 , 11 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device x86chk   Clean/Sync/RebuildNoTest
+
+Insert Into Configurations Values ( 730 , 1 , 1 , 11 , 10 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 731 , 1 , 1 , 14 , 10 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	desktop x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 732 , 1 , 1 , 11 , 11 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device x86chk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 733 , 1 , 1 , 11 , 10 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 734 , 1 , 1 , 14 , 10 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	desktop x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 735 , 1 , 1 , 11 , 11 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device x86chk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 736 , 1 , 1 , 11 , 10 , 10 , 15 , 0);		-- E:\WpMain			device x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 737 , 1 , 1 , 14 , 10 , 10 , 15 , 0);		-- E:\WpMain			desktop x86chk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 738 , 1 , 1 , 11 , 11 , 10 , 15 , 0);		-- E:\WpMain			device x86chk   Clean/Sync/RebuildNoTest
+
+-- arm Fre Configurations
+
+Insert Into Configurations Values ( 740 , 1 , 1 , 12 , 10 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device armfre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 741 , 1 , 1 , 12 , 11 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device armfre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 742 , 1 , 1 , 12 , 10 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device armfre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 743 , 1 , 1 , 12 , 11 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device armfre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 744 , 1 , 1 , 12 , 10 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device armfre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 745 , 1 , 1 , 12 , 11 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device armfre   Clean/Sync/RebuildNoTest
+
+Insert Into Configurations Values ( 750 , 1 , 1 , 12 , 10 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device armfre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 751 , 1 , 1 , 12 , 11 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device armfre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 752 , 1 , 1 , 12 , 10 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device armfre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 753 , 1 , 1 , 12 , 11 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device armfre   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 754 , 1 , 1 , 12 , 10 , 10 , 15 , 0);		-- E:\WpMain			device armfre   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 755 , 1 , 1 , 12 , 11 , 10 , 15 , 0);		-- E:\WpMain			device armfre   Clean/Sync/RebuildNoTest
+
+--arm chk Configurations
+
+Insert Into Configurations Values ( 760 , 1 , 1 , 13 , 10 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device armchk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 761 , 1 , 1 , 13 , 11 , 10 , 10 , 0);		-- E:\WP8_AxPlat		device armchk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 762 , 1 , 1 , 13 , 10 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device armchk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 763 , 1 , 1 , 13 , 11 , 10 , 11 , 0);		-- E:\Wp8_AxPlat_Himalayas		device armchk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 764 , 1 , 1 , 13 , 10 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device armchk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 765 , 1 , 1 , 13 , 11 , 10 , 12 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest	device armchk   Clean/Sync/RebuildNoTest
+
+Insert Into Configurations Values ( 770 , 1 , 1 , 13 , 10 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device armchk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 771 , 1 , 1 , 13 , 11 , 10 , 13 , 0);		-- E:\Wp8_AxPlat_Himalayas_Everest_D1	device armchk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 772 , 1 , 1 , 13 , 10 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device armchk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 773 , 1 , 1 , 13 , 11 , 10 , 14 , 0);		-- E:\AP8AMDC_DC_L2S	device armchk   Clean/Sync/RebuildNoTest
+Insert Into Configurations Values ( 774 , 1 , 1 , 13 , 10 , 10 , 15 , 0);		-- E:\WpMain			device armchk   Clean/Sync/Rebuild
+Insert Into Configurations Values ( 775 , 1 , 1 , 13 , 11 , 10 , 15 , 0);		-- E:\WpMain			device armchk   Clean/Sync/RebuildNoTest
+
+
+delete from Configurations where ID > 299
+
+
+select * from Configurations where ID > 700
+
+
+--update Configurations 
+--set DailyBuild = 0
+--where ID >= 80 and ID <= 92
+
+
+select * from BuildXml;
+select * from Users;
+select * from PhoneSKU;
+select * from Commands;
+select * from Enlistments;
+select * from Email;
+select * from BuildType
+select * from Configurations order by ID
+
+delete from Configurations where PhoneSkuID = 3 
+delete from Configurations
+delete from Email;
+delete from BuildType;
+delete from BuildXml;
+delete from Users;
+delete from PhoneSku;
+delete from Commands;
+delete from Enlistments;
+
+select Users.FirstName , Users.LastName , Email.EmailAccount , Enlistments.Path , PhoneSKU.Name , Commands.Command , BuildType.Name 
+
+              from Configurations  INNER Join 
+              Users ON Configurations.UserID = Users.UserID INNER Join
+              Enlistments on Configurations.EnlistmentID = Enlistments.ID INNER Join
+              BuildXml on Configurations.BuildXmlID = BuildXML.FileID INNER Join
+              Commands on Configurations.CommandID = Commands.CommandID INNER Join
+              PhoneSKU on Configurations.PhoneSkuID = PhoneSKU.ID INNER Join
+              Email on Configurations.EmailID = Email.EmailID INNER Join
+              BuildType on Configurations.DailyBuild = BuildType.ID
+              where BuildType.ID = 1
+                
+              
+
+
+
+SELECT     dbo.Tests.TestID, dbo.Tests.ScenarioID, dbo.IsTargeted(dbo.Scenarios.Metadata) AS Targeted, dbo.Generators.Description AS Generator, dbo.Generators.SubType, 
+                      dbo.Generators.GeneratorID, dbo.Languages.LanguageName, dbo.Tests.ContextID, dbo.Contexts.Description AS ContextDescription, dbo.Tests.StatusID, 
+                      dbo.Databases.DatabaseID, dbo.Databases.DatabaseName, dbo.Scenarios.ScenarioLevel, dbo.Scenarios.Metadata, dbo.Scenarios.CreatedDate, 
+                      dbo.Scenarios.ParentID
+FROM         dbo.Tests INNER JOIN
+                      dbo.Scenarios ON dbo.Tests.ScenarioID = dbo.Scenarios.ScenarioID INNER JOIN
+                      dbo.Contexts ON dbo.Tests.ContextID = dbo.Contexts.ContextID INNER JOIN
+                      dbo.DlinqScenarioDetails ON dbo.Scenarios.ScenarioID = dbo.DlinqScenarioDetails.ScenarioID INNER JOIN
+                      dbo.Databases ON dbo.DlinqScenarioDetails.DatabaseID = dbo.Databases.DatabaseID INNER JOIN
+                      dbo.Generators ON dbo.Scenarios.GeneratorID = dbo.Generators.GeneratorID INNER JOIN
+                      dbo.Languages ON dbo.DlinqScenarioDetails.LanguageID = dbo.Languages.LanguageID INNER JOIN
+                      dbo.Statuses ON dbo.Tests.StatusID = dbo.Statuses.StatusID
+WHERE     (dbo.Languages.LanguageID IN (1, 2)) AND (dbo.Contexts.ContextID IN (2, 130, 514)) AND (dbo.Statuses.StatusID = 1) AND 
+                      (dbo.Generators.Description NOT LIKE '%UDF%') AND (dbo.Generators.Description NOT LIKE '%SPROCPPT%') AND 
+                      (dbo.Generators.Description NOT LIKE '%SqlMetal%') AND (dbo.Generators.Description NOT LIKE '%.VB%') AND 
+                      (dbo.Generators.Description NOT LIKE '%CodegenTests%') AND (dbo.Generators.Description NOT LIKE '%UserDefinedFunc%') AND 
+                      (dbo.Generators.Description NOT LIKE '%SQLEXPSamples%') AND (dbo.Generators.Description NOT LIKE '%ExtensionMethods%') AND 
+                      (dbo.Generators.Description NOT LIKE '%Zen.Util.Mapping%') AND (dbo.Generators.Description NOT LIKE '%Targeted.MOM%') AND 
+                      (dbo.Generators.Description NOT LIKE '%DataBindingTests%') AND (dbo.Generators.Description NOT LIKE '%Targeted.CreateDatabase%') AND 
+                      (dbo.Generators.Description NOT LIKE '%Samples.PDC%') AND (dbo.Generators.Description NOT LIKE '%NorthwindMidInheritance%') AND 
+                      (dbo.Generators.Description NOT LIKE '%Targeted.CUD.SpecialMapping%')

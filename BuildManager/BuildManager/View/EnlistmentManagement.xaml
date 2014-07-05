@@ -1,0 +1,38 @@
+﻿<local:DbTableModifyBase 
+        xmlns:local="clr-namespace:BuildManager.View"
+        x:Class="BuildManager.View.EnlistmentManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Enlistment Management" Height="600" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Grid>
+        <Grid HorizontalAlignment="Stretch" Margin="0" Name="grid1" VerticalAlignment="Stretch" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".05*" />
+                <RowDefinition Height=".05*" />
+                <RowDefinition Height=".07*" />
+                <RowDefinition Height=".83*" />
+            </Grid.RowDefinitions>
+            <Label  Name="label1"       Content="{Binding TableName}" Grid.Row="2" Margin="5,3,3,5"  Grid.ColumnSpan="2" />
+            <Button Name="AddRowButton"  Content="_Add"     Grid.Column="0" Margin="5,3,3,5"  Click="addButton_Clicked" />
+            <Button Name="deleteButton"  Content="_Delete"  Grid.Column="1" Margin="5,3,3,5"  IsEnabled="True" Click="delButton_Clicked"  />
+            <Button Name="okButton"      Content="_OK"      Grid.Column="7" Margin="5,3,3,5"                IsDefault="True" Click="OkButton_Clicked" />
+            <Button Name="cancelButton"  Content="_Cancel"  Grid.Column="7" Margin="5,3,3,5"  Grid.Row="1"  IsCancel="True" Click="CancelButton_Clicked"  />
+            <DataGrid Name="dataGrid1" AutoGenerateColumns="True" Grid.ColumnSpan="8" Grid.Row="3" 
+                      HorizontalAlignment="Stretch" Margin="5,5,5,5"  
+                      VerticalAlignment="Stretch" 
+                      SelectionChanged="SelectionChanged" 
+                      CellEditEnding="CellEditEnding" 
+                      PreviewKeyDown="DataGridPreviewKeyDown"   />
+        </Grid>
+    </Grid>
+</local:DbTableModifyBase>

@@ -1,0 +1,132 @@
+﻿<Window x:Class="BuildManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:BuildManager.Helpers" 
+        Title="Local Build Manager" Height="768" Width="1024" xmlns:my="http://schemas.AvalonControls/AvalonControlsLibrary/Controls" Closing="Window_Closing">
+    <Window.Resources>
+        <converters:DataGridFormatConverters x:Key="dataGridFormatConverters" />
+    </Window.Resources>
+    <Grid Name="WindowLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".05*" />
+            <RowDefinition Height=".9*" />
+            <RowDefinition Height=".05*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0"  Height="23"  Name="mainMenu" >
+        	<MenuItem x:Name="menuFile" Header="File">
+        		<MenuItem x:Name="menuFileExit" Header="Exit" Click="menuFileExit_Clicked"/>
+        	</MenuItem>
+            <MenuItem x:Name="menuTableData" Header="TableData" IsEnabled="True">
+                <MenuItem x:Name="menuEnlistmentsManage" Header="Manage Enlistments" Click="menuEnlistmentsManage_Clicked"/>
+                <MenuItem x:Name="menuPhoneSkusManage" Header="Manage PhoneSkus" Click="menuPhoneSkusManage_Clicked"/>
+                <MenuItem x:Name="menuBuildCommandsManage" Header="Manage Build Commands" Click="menuBuildCommandsManage_Clicked"/>
+                <MenuItem x:Name="menuemailManage" Header="Manage Email Addresses" Click="menuEmailManage_Clicked"/>
+                <MenuItem x:Name="menupbXmlManage" Header="Manage PbXml Files" Click="menuPbXmlManage_Clicked"/>
+                <MenuItem x:Name="menuUserManage" Header="Manage Users" Click="menuUserManage_Clicked"/>
+        	</MenuItem>
+        	<MenuItem x:Name="menuConfiguration" Header="Configuration" IsEnabled="True">
+                <MenuItem x:Name="menuConfigManage" Header="Configuration Selection" Click="menuConfigSelection_Clicked"/>
+        	</MenuItem>
+        	<MenuItem x:Name="menuBuild" Header="Build" IsEnabled="False">
+                <MenuItem x:Name="menuBuildDaily" Header="Daily" Click="menuBuildDaily_Clicked"/>
+                <MenuItem x:Name="menuBuildWeekly" Header="Weekly" Click="menuBuildWeekly_Clicked"/>
+                <MenuItem x:Name="menuBuildSingle" Header="Single" Click="menuBuildSingle_Clicked"/>
+                <MenuItem x:Name="menuBuildResults" Header="Results" Click="menuBuildResults_Clicked"/>
+        	</MenuItem>
+        	<MenuItem x:Name="menuHelp" Header="Help">
+                <MenuItem x:Name="menuHelpAbout" Header="About" Click="menuHelpAbout_Clicked"/>
+        	</MenuItem>
+        </Menu>
+        <StatusBar Grid.Row="2" Height="23"  Name="mainStatusBar" />
+        <Grid Name ="Contents" Grid.Row ="1" Loaded="Window_Loaded">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".2*" />
+                <ColumnDefinition Width=".2*" />
+                <ColumnDefinition Width=".1*" />
+                <ColumnDefinition Width=".3*" />
+                <ColumnDefinition Width=".2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".05*" />
+                <RowDefinition Height=".05*" />
+                <RowDefinition Height=".05*" />
+                <RowDefinition Height=".8*" />
+            </Grid.RowDefinitions>
+
+            <Button Content="Clean All Enlistments"  Name="cleanAllButton"  Click="cleanAllButton_Click" Margin="5,3,3,5" />
+            <Button Content="Sync All Enlistments"  Margin="5,3,3,5" Name="syncAllBbutton"  Click="syncAllButton_Click" Grid.Row="1" />
+            <Button Content="Daily Build" Margin="5,3,3,5" Name="dailyBuildButton"  Grid.Row="2" Click="dailyBuildButton_Click" />
+            <Button Content="Clean/Sync  All Enlistments"  Name="cleanSyncAllButton"  Grid.Column="1" Margin="5,3,3,5" Click="cleanSyncAllButton_Click" />
+            <Button Content="Clean/Sync  All Daily  Build" Margin="5,3,3,5" Name="cleanSyncDailBuild" Click="cleanSyncDailyBuild_Click" Grid.Column="1" Grid.Row="1" />
+            <Button Content="_Abort" Margin="5,3,3,5" Name="abortButton" Grid.Column="1" Grid.Row="2" Click="abortButton_Click"/>
+            <ComboBox Grid.Column="3" Margin="5,3,3,5" Name="singleEnlistmentComboBox"  SelectionChanged="singleEnlistmentComboBox_SelectionChanged"/>
+            <ComboBox Grid.Column="4" Margin="5,3,3,5" Name="singleEnlistmentSkuComboBox"  SelectionChanged="singleEnlistmentSkuComboBox_SelectionChanged"/>
+            <Button Content="Clean" Grid.Column="2"  Margin="5,3,3,5" Name="singleClean" Click="singleClean_Click"/>
+            <Button Content="Sync" Grid.Column="2"  Grid.Row="1"   Margin="5,3,3,5" Name="singleSync" Click="singleSync_Click"/>
+            <Button Content="Build" Grid.Column="2" Grid.Row="2" Margin="5,3,3,5" Name="singleBuild" Click="singlebuild_Click"/>
+            
+            <Grid Name="ConfigExecuteGrid" Grid.Row="1" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".3*" />
+                    <ColumnDefinition Width=".3*" />
+                    <ColumnDefinition Width=".4*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="_Execute Set" Grid.Column="1" Grid.Row="0"    Margin="5,3,5,5" Name="executeSet" Click="executeSet_Click"/>
+                <Button Content="_Configure Set" Grid.Column="0" Grid.Row="0"  Margin="5,3,5,5" Name="configureSet" Click="configureSet_Click"/>
+                <ComboBox Name="processPriorityComboBox"  ItemsSource="{Binding ProcessPriorities}" Grid.Column="2" Margin="5,3,3,5"   SelectionChanged="processPriorityComboBox_SelectionChanged"/>
+            </Grid>
+            
+            
+            <CheckBox Content="Build Test Tree?" Grid.Column="3" Grid.Row="2" Height="16" HorizontalAlignment="Left" Margin="5,6,0,0" Name="buildTestTreeCheckbox" VerticalAlignment="Top" Width="105" />
+            <CheckBox Content="Schedule Start?" Grid.Column="4" Grid.Row="2" Height="16" HorizontalAlignment="Left" Margin="5,6,0,0" Name="scheduleBuildCheckbox" VerticalAlignment="Top" Width="105" />
+            <my:DateTimePicker Grid.Column="4" Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,3,3,5" Name="dateTimePicker1" VerticalAlignment="Stretch" />
+            <Grid Name="LogGrid" Grid.Row="3" Grid.ColumnSpan="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".05*" />
+                    <RowDefinition Height=".45*" />
+                    <RowDefinition Height=".05*" />
+                    <RowDefinition Height=".45*" />
+                </Grid.RowDefinitions>
+                <Label Content="Job Summary" Height="28" HorizontalAlignment="Left" Margin="5,0,0,0" Name="commandLogLlabel" VerticalAlignment="Top" />
+                <ListBox ItemsSource="{Binding Results}"   HorizontalAlignment="Stretch" Name="resultsListBox" VerticalAlignment="Stretch"  Grid.Row="1" 
+                 VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="4" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate >
+                            <Grid Width="1000">
+                                <Grid.ColumnDefinitions>
+                                    <!--Job ID-->
+                                    <ColumnDefinition Width=".05*"/>
+                                    <!--Status-->
+                                    <ColumnDefinition Width=".08*"/>
+                                    <!--Command-->
+                                    <ColumnDefinition Width=".08*"/>
+                                    <!--Enlistment -->
+                                    <ColumnDefinition Width=".2*"/>
+                                    <!--Phone SKU -->
+                                    <ColumnDefinition Width=".2*"/>
+                                    <!--Start Time -->
+                                    <ColumnDefinition Width=".15*"/>
+                                    <!--Stop Time -->
+                                    <ColumnDefinition Width=".15*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding JobID, Mode=TwoWay, UpdateSourceTrigger=Explicit}"    Margin="0,0,0,0" Grid.Column="0" TextWrapping="Wrap" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Status, Mode=TwoWay, UpdateSourceTrigger=Explicit}"  Foreground="{Binding StatusColor}" 
+                                           Margin="0,0,0,0" Grid.Column="1" TextWrapping="Wrap" TextAlignment="Left" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding Command, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Margin="0,0,0,0" Grid.Column="2" TextWrapping="Wrap" TextAlignment="Left" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding EnlistmentName, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Margin="0,0,0,0" Grid.Column="3" TextWrapping="Wrap" TextAlignment="Left" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding PhoneSku, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Margin="0,0,0,0" Grid.Column="4" TextWrapping="Wrap" TextAlignment="Left" HorizontalAlignment="Left" />
+                                <TextBlock Text="{Binding StartTime, Mode=TwoWay, UpdateSourceTrigger=Explicit}"  Margin="0,0,0,0" Grid.Column="5"/>
+                                <TextBlock Text="{Binding StopTime, Mode=TwoWay, UpdateSourceTrigger=Explicit}" Margin="0,0,0,0" Grid.Column="6" TextWrapping="Wrap" TextAlignment="Left" HorizontalAlignment="Left" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label Content="Job Details" Grid.Row="2"   Height="28" HorizontalAlignment="Left" Margin="5,0,0,0" Name="commandDetailsLogLlabel" VerticalAlignment="Top" />
+                <ListBox HorizontalAlignment="Stretch" Name="resultsDetailsListBox" VerticalAlignment="Stretch"  Grid.Row="3" 
+                 VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="4"
+                         ItemsSource="{Binding Log}">
+                </ListBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

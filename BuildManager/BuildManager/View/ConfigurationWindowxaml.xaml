@@ -1,0 +1,131 @@
+﻿<Window x:Class="BuildManager.View.ConfigurationWindowxaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        Title="Build Configuration Management" Height="768" Width="1024" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Grid Name="ConfigurationGrid">
+        <Grid Name="ResultsWindowGrid" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".25*" />
+                <RowDefinition Height=".75*" />
+            </Grid.RowDefinitions>
+            <Grid Name="ResultsCommands">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".1*" />
+                    <ColumnDefinition Width=".2*" />
+                    <ColumnDefinition Width=".2*" />
+                    <ColumnDefinition Width=".1*" />
+                    <ColumnDefinition Width=".1*" />
+                    <ColumnDefinition Width=".1*" />
+                    <ColumnDefinition Width=".1*" />
+                    
+                </Grid.ColumnDefinitions>
+                <TextBlock  Name="query0textBlock"             Margin="5,3,3,5"  Grid.Column="0" Text="Query Select"   />
+                <ComboBox   Name="query0FieldSelectComboBox"   Margin="5,3,3,5"  Grid.Column="1" SelectionChanged="query0FieldSelectChanged" />
+                <ComboBox   Name="query0ItemSelectComboBox"    Margin="5,3,3,5"  Grid.Column="2"   />
+                <Button     Name="query0ClearButton"           Margin="5,3,3,5"  Grid.Column="3"  Content="Clear"  Click="query0ClearButton_Click" />
+
+                <TextBlock  Name="query1textBlock"             Margin="5,3,3,5"  Grid.Column="0"  Grid.Row="1" Text="Query Select"   />
+                <ComboBox   Name="query1FieldSelectComboBox"   Margin="5,3,3,5"  Grid.Column="1"  Grid.Row="1" SelectionChanged="query1FieldSelectChanged" />
+                <ComboBox   Name="query1ItemSelectComboBox"    Margin="5,3,3,5"  Grid.Column="2"  Grid.Row="1" />
+                <Button     Name="query1ClearButton"           Margin="5,3,3,5"  Grid.Column="3"  Grid.Row="1" Content="Clear"   Click="query1ClearButton_Click" />
+
+                <TextBlock  Name="query2textBlock"             Margin="5,3,3,5"  Grid.Column="0" Grid.Row="2" Text="Query Select"   />
+                <ComboBox   Name="query2FieldSelectComboBox"   Margin="5,3,3,5"  Grid.Column="1" Grid.Row="2" SelectionChanged="query2FieldSelectChanged" />
+                <ComboBox   Name="query2ItemSelectComboBox"    Margin="5,3,3,5"  Grid.Column="2" Grid.Row="2" />
+                <Button     Name="query2ClearButton"           Margin="5,3,3,5"  Grid.Column="3" Grid.Row="2" Content="Clear"   Click="query2ClearButton_Click" />
+
+                <TextBlock  Name="query3textBlock"             Margin="5,3,3,5"  Grid.Column="0"  Grid.Row="3" Text="Query Select"   />
+                <ComboBox   Name="query3FieldSelectComboBox"   Margin="5,3,3,5"  Grid.Column="1"  Grid.Row="3" SelectionChanged="query3FieldSelectChanged" />
+                <ComboBox   Name="query3ItemSelectComboBox"    Margin="5,3,3,5"  Grid.Column="2"  Grid.Row="3" />
+                <Button     Name="query3ClearButton"           Margin="5,3,3,5"  Grid.Column="3"  Grid.Row="3" Content="Clear"   Click="query3ClearButton_Click" />
+
+                <TextBlock  Name="buildSetLabeltextBlock"  IsEnabled="False"  Margin="5,3,3,5"  Text="Set Name"  Grid.Column="0" Grid.Row="4"/>
+                <ComboBox   Name="buildSetSelectComboBox"  IsEnabled="False"  Margin="5,3,3,5"  Grid.Column="1"  Grid.Row="4" SelectionChanged="buildSetSelectChanged" />
+                <TextBlock  Name="buildSettextBlock"       IsEnabled="False"  Margin="5,3,3,5"  Text="New Set Name"  Grid.Column="2" Grid.Row="4"/>
+                <Button     Name="buildSetAddButton"       IsEnabled="True"  Margin="5,3,3,5" Content="_Add To Set"    Grid.Column="3" Grid.Row="4" Click="buildSetAddButton_Click" />
+                <Button     Name="buildSetShowButton"       IsEnabled="True"  Margin="5,3,3,5" Content="Show Set" Grid.Column="4" Grid.Row="4" Click="buildSetShowButton_Click" />
+                <Button     Name="buildSetDelButton"       IsEnabled="True"  Margin="5,3,3,5" Content="_Clear Set" Grid.Column="5" Grid.Row="4" Click="buildSetDelButton_Click" />
+
+                <Button     Name="queryeButton"         Margin="5,3,3,5" Content="_Query" Grid.Column="5" Click="queryButton_Click" />
+                <Button     Name="closeButton"   IsDefault="True"   Margin="5,3,3,5" Content="OK" Grid.Column="6" Click="closeButton_Click" />
+                <Button     Name="cancelButton"  IsCancel="True"    Margin="5,3,3,5" Content="Cancel" Grid.Column="6" Grid.Row="1"  Click="cancelButton_Click" />
+
+
+                <TextBlock  Name="testtextBlock"   Margin="5,3,3,5"  Text="Test Fns"  Grid.Column="0" Grid.Row="5"/>
+                <Button     Name="addTestRow"         Margin="5,3,3,5" Content="Add Test Row"  Grid.Row="5"  Grid.Column="1" Click="addTestRowButton_Click" />
+                <Button     Name="modifyTestRow"      Margin="5,3,3,5" Content="Modify Test Row" Grid.Row="5" Grid.Column="2" Click="modifyTestRowButton_Click" />
+                <Button     Name="deleteTestRow"      Margin="5,3,3,5" Content="Delete Test Row" Grid.Row="5" Grid.Column="3"   Click="deleteTestRowButton_Click" />
+                <Button     Name="resetContext"      Margin="5,3,3,5" Content="Reset Data Context" Grid.Row="5" Grid.Column="4"   Click="resetDataContextButton_Click" />
+                <Button     Name="deleteButton"        Margin="5,3,3,5" Content="Delete Selected Rows" Grid.Row="5" Grid.Column="5"    Click="deleteButton_Click" />
+
+            </Grid>
+            <Grid Name="ResultsGrid" Grid.Row="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".05*" />
+                    <RowDefinition Height=".95*" />
+                </Grid.RowDefinitions>
+                <DataGrid Name="configDataGridMan" 
+                          AutoGenerateColumns="False" 
+                          Grid.Row="1"  
+                          Grid.ColumnSpan="4"
+                          HorizontalAlignment="Stretch" 
+                          VerticalContentAlignment="Stretch" 
+                          Sorting="WPF_DataGrid_Sorting" 
+                      SelectionChanged="SelectionChanged" 
+                      CellEditEnding="CellEditEnding" 
+                      PreviewKeyDown="DataGridPreviewKeyDown" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ConfigID" Binding="{Binding ID}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="UserID" Binding="{Binding UserID}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="First" Binding="{Binding User.FirstName}" MinWidth="50" SortMemberPath="UserFirstName"/>
+                        <DataGridTextColumn Header="Last" Binding="{Binding User.LastName}"  MinWidth="75" SortMemberPath="UserLastName"/>
+                        <DataGridTemplateColumn Header="PhoneSKU "  IsReadOnly="False" SortMemberPath="PhoneSkuName" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PhoneSKU.Name}"  Margin="2,0,2,0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Enlistment "  IsReadOnly="False" SortMemberPath="EnlistmentPath" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Enlistment1.Path}"  Margin="2,0,2,0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Command "  IsReadOnly="False" SortMemberPath="CommandCommand1" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Command.Command1}"  Margin="2,0,2,0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Build Type "  IsReadOnly="False" SortMemberPath="BuildTypeName">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding BuildType.Name}"  Margin="2,0,2,0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Email"  IsReadOnly="False" SortMemberPath="EmailEmailAccount">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Email.EmailAccount}"  Margin="2,0,2,0" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>                
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
