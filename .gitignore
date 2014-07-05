@@ -258,8 +258,7 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-
+# Special Excludes for projects included in the repository
 /Run
 BuildManager/BuildManager/obj/
-BuildManager/BuildManager/obj/
-BuildManager/BuildManager/obj/
+
