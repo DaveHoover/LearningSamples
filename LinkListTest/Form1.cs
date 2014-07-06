@@ -22,7 +22,6 @@ namespace LinkListTest
 	/// powerful .NET capabilities. This function is RetrieveDataNet.
 	///  The capabilities in RetrieveDataNet would not be available without custom coding
 	/// in a non .NET language.
-    /// Test for GitHub
 	/// 
 	/// </summary>
 	public class Form1 : System.Windows.Forms.Form
