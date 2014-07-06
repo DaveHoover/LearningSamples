@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaEncoder", "MediaEncoder.csproj", "{15110550-A171-4EA1-907F-FEDD876AD44B}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "WindowsMediaAutomation", "Setup\Setup.vdproj", "{C446B22B-DB0D-45C4-B6CC-823C679149E3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15110550-A171-4EA1-907F-FEDD876AD44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15110550-A171-4EA1-907F-FEDD876AD44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15110550-A171-4EA1-907F-FEDD876AD44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15110550-A171-4EA1-907F-FEDD876AD44B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C446B22B-DB0D-45C4-B6CC-823C679149E3}.Debug|Any CPU.ActiveCfg = Debug
+		{C446B22B-DB0D-45C4-B6CC-823C679149E3}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

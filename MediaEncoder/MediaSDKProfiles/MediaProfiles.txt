@@ -1,0 +1,13 @@
+Media Encoder Profile Information and Generation:
+
+The media profiles included in this folder should be copied to the following folder on the machine where you will run this application.
+
+D:\Program Files\Windows Media Components\Encoder\Profiles
+
+The path may be different for your machine.
+
+On the Encoder helper application, there is a button that you can select which will open the profile editor. This will allow you to edit or create a new profile.
+The media SDK code most easily uses one of these profiles to work with the programming API.
+
+The profiles were taken off of the media encoder saved state information that I had been using for quite some time.
+

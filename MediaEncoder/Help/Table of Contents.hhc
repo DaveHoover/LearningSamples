@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Welcome">
+		<param name="Local" value="Default.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Program Summary">
+		<param name="Local" value="Summary.htm">
+		<param name="Local" value="MediaEncoderOverview.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Summary">
+			<param name="Local" value="Summary.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Overview">
+			<param name="Local" value="MediaEncoderOverview.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="User Input Control Summary">
+		<param name="Local" value="TitleInformation.htm">
+		<param name="Local" value="DescriptionInformation.htm">
+		<param name="Local" value="AuthorInformation.htm">
+		<param name="Local" value="FileSelection.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Title">
+			<param name="Local" value="TitleInformation.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Description">
+			<param name="Local" value="DescriptionInformation.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Author">
+			<param name="Local" value="AuthorInformation.htm">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="File Selection">
+			<param name="Local" value="FileSelection.htm">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Encoding Command">
+		<param name="Local" value="EncodeCommand.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Encode Details">
+			<param name="Local" value="EncodeCommand.htm">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>
