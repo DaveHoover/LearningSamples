@@ -16,6 +16,7 @@ namespace MediaFileSorter.Model
         /// 3rd attempt 
         /// 4rth attempt
         /// 5th attemp
+        /// 6th attempt
         /// </summary>
         public FileListCollection()
         {
