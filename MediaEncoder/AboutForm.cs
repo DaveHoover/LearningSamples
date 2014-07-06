@@ -25,6 +25,7 @@ namespace MediaEncoder
 		public AboutForm()
 		{
 			InitializeComponent();
+            // Test to see if I can upload to GitHub
          StringBuilder s = new StringBuilder();
          s.Append ( "This media encoder helper application is designed to \r\n");
          s.Append ( "take an audio message and generate three encoded output \r\n");
